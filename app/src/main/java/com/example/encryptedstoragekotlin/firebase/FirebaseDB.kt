@@ -21,7 +21,7 @@ class FirebaseDB {
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
             override fun onChildRemoved(snapshot: DataSnapshot) {
@@ -29,11 +29,11 @@ class FirebaseDB {
             }
 
             override fun onChildMoved(snapshot: DataSnapshot, previousChildName: String?) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+
             }
 
             override fun onCancelled(error: DatabaseError) {
-                TODO("not implemented") //To change body of created functions use File | Settings | File Templates.
+                
             }
         }
 
