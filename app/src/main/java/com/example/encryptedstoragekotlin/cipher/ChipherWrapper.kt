@@ -12,14 +12,14 @@ import javax.crypto.NoSuchPaddingException
 import javax.crypto.spec.GCMParameterSpec
 
 class ChipherWrapper {
-    private var cipher:Cipher? = null
+    private var cipher:Cipher?
     val TRANSFORMATION = "AES/GCM/NoPadding"
     val GCM_TAG = 16
     val GCM_IV = 12
 
 
-    @Throws(NoSuchPaddingException::class, NoSuchAlgorithmException::class)
-    fun init()  { cipher = Cipher.getInstance(TRANSFORMATION) };
+
+    init  { cipher = Cipher.getInstance(TRANSFORMATION) }
 
 
     @ExperimentalStdlibApi
@@ -27,26 +27,26 @@ class ChipherWrapper {
         IllegalBlockSizeException::class, NoSuchAlgorithmException::class,
         InvalidAlgorithmParameterException::class, UnsupportedEncodingException::class)
     fun encrypt(plainText:String, key:Key):String{
-        var iv = ByteArray(GCM_IV)
+        val iv = ByteArray(GCM_IV)
         var random = SecureRandom()
-        var spec = GCMParameterSpec(GCM_TAG * Byte.SIZE_BITS, iv)
+        val spec = GCMParameterSpec(GCM_TAG * Byte.SIZE_BITS, iv)
         cipher?.init(Cipher.ENCRYPT_MODE,key,spec) ?: throw CipherNotInitializedException("Cipher hasn't been initialized")
-        var cipherText = cipher?.doFinal(plainText.encodeToByteArray()) ?: ByteArray(0)
-        var encryptedBytes = ByteArray(cipherText.size + iv.size)
+        val cipherText = cipher?.doFinal(plainText.encodeToByteArray()) ?: ByteArray(0)
+        val encryptedBytes = ByteArray(cipherText.size + iv.size)
         System.arraycopy(iv,0,encryptedBytes,0,iv.size)
         System.arraycopy(cipherText,0,encryptedBytes,iv.size,cipherText.size)
         return Base64.encodeToString(encryptedBytes,Base64.DEFAULT)
     }
-    
+
     @Throws(InvalidKeyException::class, BadPaddingException::class,
         IllegalBlockSizeException::class, NoSuchAlgorithmException::class,
         InvalidAlgorithmParameterException::class, UnsupportedEncodingException::class)
     fun decrypt(encryptedText:String, key:Key):String{
-        var decoded:ByteArray = Base64.decode(encryptedText, Base64.DEFAULT)
-        var iv:ByteArray = Arrays.copyOfRange(decoded, 0, GCM_IV)
-        var spec = GCMParameterSpec(GCM_TAG * Byte.SIZE_BITS,iv)
+        val decoded:ByteArray = Base64.decode(encryptedText, Base64.DEFAULT)
+        val iv:ByteArray = Arrays.copyOfRange(decoded, 0, GCM_IV)
+        val spec = GCMParameterSpec(GCM_TAG * Byte.SIZE_BITS,iv)
         cipher?.init(Cipher.DECRYPT_MODE,key,spec) ?: throw CipherNotInitializedException("Cipher hasn't been initialized")
-        var cipherText = cipher?.doFinal(decoded,GCM_IV,decoded.size - GCM_IV)
+        val cipherText = cipher?.doFinal(decoded,GCM_IV,decoded.size - GCM_IV)
         return String(cipherText ?: ByteArray(0),Charsets.UTF_8)
     }
 }
