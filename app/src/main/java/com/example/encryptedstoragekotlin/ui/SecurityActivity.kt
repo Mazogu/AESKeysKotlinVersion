@@ -1,7 +1,8 @@
-package com.example.encryptedstoragekotlin
+package com.example.encryptedstoragekotlin.ui
 
 import androidx.appcompat.app.AppCompatActivity
 import android.os.Bundle
+import com.example.encryptedstoragekotlin.R
 
 class SecurityActivity : AppCompatActivity() {
 
