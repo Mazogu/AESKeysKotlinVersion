@@ -1,17 +1,12 @@
 package com.example.encryptedstoragekotlin.firebase
 
 import com.google.firebase.database.*
+import javax.inject.Inject
 
-class FirebaseDB {
-    private val database:FirebaseDatabase?
-    private val reference:DatabaseReference?
+class FirebaseDB @Inject constructor(database: FirebaseDatabase){
+    private var reference:DatabaseReference = database.reference
     private lateinit var callBack: CallBack
     private lateinit var childEventListener: ChildEventListener
-
-    init {
-        database = FirebaseDatabase.getInstance()
-        reference = database?.reference
-    }
 
     fun attachCallback(callBack:CallBack){
         this.callBack = callBack
@@ -37,10 +32,10 @@ class FirebaseDB {
             }
         }
 
-        fun sendMessage(text:String) = reference?.push()?.setValue(text)
+        fun sendMessage(text:String) = reference.push().setValue(text)
 
         fun removeListeners(){
-            reference?.removeEventListener(childEventListener)
+            reference.removeEventListener(childEventListener)
         }
     }
 
