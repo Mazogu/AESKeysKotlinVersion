@@ -1,18 +1,19 @@
 package com.example.encryptedstoragekotlin.ui
 
 import android.view.LayoutInflater
-import android.view.View
 import android.view.ViewGroup
-import android.widget.TextView
+import androidx.databinding.DataBindingUtil
 import androidx.recyclerview.widget.RecyclerView
+import com.example.encryptedstoragekotlin.BR
 import com.example.encryptedstoragekotlin.R
+import com.example.encryptedstoragekotlin.databinding.HolderDecryptBinding
 
 class DecryptAdapter:RecyclerView.Adapter<DecryptHolder>(){
 
     private val decryptedStrings = mutableListOf<Pair<String, String>>()
 
     override fun onCreateViewHolder(parent: ViewGroup, viewType: Int): DecryptHolder {
-        val view =  LayoutInflater.from(parent.context).inflate(R.layout.holder_decrypt, parent, false)
+        val view:HolderDecryptBinding = DataBindingUtil.inflate(LayoutInflater.from(parent.context), R.layout.holder_decrypt, parent, false)
         return DecryptHolder(view)
     }
 
@@ -22,7 +23,7 @@ class DecryptAdapter:RecyclerView.Adapter<DecryptHolder>(){
 
     override fun onBindViewHolder(holder: DecryptHolder, position: Int) {
         val secretString = decryptedStrings[position]
-        holder.decryptedText.text = secretString.second
+        holder.bind(secretString)
     }
 
     fun addString(entry:Pair<String, String>){
@@ -46,6 +47,9 @@ class DecryptAdapter:RecyclerView.Adapter<DecryptHolder>(){
 }
 
 
-class DecryptHolder(itemView: View) :RecyclerView.ViewHolder(itemView){
-    val decryptedText:TextView = itemView.findViewById(R.id.decrypted_text)
+class DecryptHolder(private val binding: HolderDecryptBinding) :RecyclerView.ViewHolder(binding.root){
+    fun bind(decrypted:Pair<String, String>){
+        binding.setVariable(BR.plainText, decrypted)
+        binding.executePendingBindings()
+    }
 }

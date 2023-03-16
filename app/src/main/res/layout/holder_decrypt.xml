@@ -1,7 +1,7 @@
 <?xml version="1.0" encoding="utf-8"?>
 <layout>
     <data>
-        <variable name="viewModel" type="com.example.encryptedstoragekotlin.ui.SecurityViewModel"/>
+        <variable name="plainText" type="kotlin.Pair&lt;String,String&gt;"/>
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
             xmlns:android="http://schemas.android.com/apk/res/android"
@@ -12,6 +12,7 @@
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/decrypted_text"
+                android:text="@{plainText.second}"
                 android:layout_marginStart="@dimen/side_margin"
                 android:layout_marginEnd="@dimen/side_margin"
                 app:layout_constraintTop_toTopOf="parent"

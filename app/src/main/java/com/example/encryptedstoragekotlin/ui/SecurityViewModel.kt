@@ -2,9 +2,6 @@ package com.example.encryptedstoragekotlin.ui
 
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableField
-import androidx.databinding.ObservableList
-import androidx.lifecycle.LiveData
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModel
 import com.example.encryptedstoragekotlin.cipher.CipherWrapper
 import com.example.encryptedstoragekotlin.cipher.KeyStoreWrapper
