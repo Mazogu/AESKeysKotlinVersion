@@ -8,7 +8,6 @@ import androidx.databinding.DataBindingUtil
 import androidx.databinding.ObservableArrayList
 import androidx.databinding.ObservableList.OnListChangedCallback
 import androidx.fragment.app.Fragment
-import androidx.lifecycle.MutableLiveData
 import androidx.lifecycle.ViewModelProvider
 import androidx.recyclerview.widget.LinearLayoutManager
 import androidx.recyclerview.widget.RecyclerView
@@ -94,7 +93,7 @@ class DecryptFragment: Fragment() {
                 sender?.let {
                     val adapter = recyclerView.adapter as DecryptAdapter
                     if(itemCount == 1)
-                        adapter.removeString(it[positionStart].first)
+                        adapter.removeString(positionStart)
                 }
             }
         }

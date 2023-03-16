@@ -36,12 +36,11 @@ class DecryptAdapter:RecyclerView.Adapter<DecryptHolder>(){
         notifyItemRangeInserted(decryptedStrings.size - 1, list.size)
     }
 
-    fun removeString(key: String){
-        val position:Int = decryptedStrings.indexOfFirst { it.first == key }
+    fun removeString(position:Int ){
         if(position < 0)
             return
         decryptedStrings.removeAt(position)
-        notifyItemInserted(position)
+        notifyItemRemoved(position)
     }
 
 }

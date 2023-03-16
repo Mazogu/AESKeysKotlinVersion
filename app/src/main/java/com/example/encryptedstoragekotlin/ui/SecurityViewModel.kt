@@ -37,7 +37,6 @@ class SecurityViewModel @Inject constructor(private val cipher:CipherWrapper, pr
 
     override fun retrieveData(key: String?, data: String?) {
         try{
-            Timber.d("Testing whatever $key and text: $data")
             val secretKey: Key? = keyWrapper.getKey(ALIAS)
             val plainText = cipher.decrypt(data, secretKey)
             key?.let { decryptedStrings.add(Pair(it, plainText)) }
@@ -48,7 +47,10 @@ class SecurityViewModel @Inject constructor(private val cipher:CipherWrapper, pr
     }
 
     override fun removeData(key: String?) {
-        key?.let { decryptedStrings.removeIf{key == it.first} }
+        key?.let {
+            val removed = decryptedStrings.indexOfFirst{ key == it.first }
+            decryptedStrings.removeAt(removed)
+        }
     }
 
     fun removeListeners() {
