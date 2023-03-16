@@ -1,3 +1,7 @@
 <resources>
     <string name="app_name">EncryptedStorageKotlin</string>
+    <string name="encrypt_button">Submit</string>
+    <string name="encrypt_button_hint">Enter Text</string>
+    <string name="empty_list">No Decrypted Strings</string>
+    <string name="encrypt_warning">Please enter text</string>
 </resources>

@@ -32,7 +32,7 @@ class CipherWrapper @Inject constructor(private val cipher: Cipher) {
     @Throws(InvalidKeyException::class, BadPaddingException::class,
         IllegalBlockSizeException::class, NoSuchAlgorithmException::class,
         InvalidAlgorithmParameterException::class, UnsupportedEncodingException::class)
-    fun decrypt(encryptedText:String, key:Key):String{
+    fun decrypt(encryptedText:String?, key:Key?):String{
         val decoded:ByteArray = Base64.decode(encryptedText, Base64.DEFAULT)
         val iv:ByteArray = decoded.copyOfRange(0, GCM_IV)
         val spec = GCMParameterSpec(GCM_TAG * Byte.SIZE_BITS,iv)

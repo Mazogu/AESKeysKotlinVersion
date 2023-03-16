@@ -12,7 +12,7 @@ class FirebaseDB @Inject constructor(database: FirebaseDatabase){
         this.callBack = callBack
         childEventListener = object : ChildEventListener{
             override fun onChildAdded(snapshot: DataSnapshot, previousChildName: String?) {
-                callBack.retrieveData(snapshot.getValue(String::class.java), snapshot.key)
+                callBack.retrieveData(snapshot.key, snapshot.getValue(String::class.java))
             }
 
             override fun onChildChanged(snapshot: DataSnapshot, previousChildName: String?) {
@@ -31,16 +31,17 @@ class FirebaseDB @Inject constructor(database: FirebaseDatabase){
                 
             }
         }
+        reference.addChildEventListener(childEventListener)
+    }
 
-        fun sendMessage(text:String) = reference.push().setValue(text)
+    fun sendMessage(text:String) = reference.push().setValue(text)
 
-        fun removeListeners(){
-            reference.removeEventListener(childEventListener)
-        }
+    fun removeListeners(){
+        reference.removeEventListener(childEventListener)
     }
 
     interface CallBack{
-        fun retrieveData(data:String?, key:String?)
+        fun retrieveData(key:String?, data:String?)
         fun removeData(key:String?)
     }
 

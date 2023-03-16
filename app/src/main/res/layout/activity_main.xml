@@ -14,13 +14,15 @@
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toTopOf="parent"
+            app:layout_constraintBottom_toTopOf="@+id/decrypted_list"
             tools:layout="@layout/fragment_encrypt" />
     <androidx.fragment.app.FragmentContainerView
             android:layout_width="0dp"
             android:layout_height="wrap_content"
-            android:id="@+id/decrypted_list"
+            android:id="@id/decrypted_list"
             tools:layout="@layout/fragment_decrypt"
             android:name="com.example.encryptedstoragekotlin.ui.DecryptFragment"
+            android:layout_marginTop="@dimen/button_top_margin"
             app:layout_constraintStart_toStartOf="parent"
             app:layout_constraintEnd_toEndOf="parent"
             app:layout_constraintTop_toBottomOf="@id/send_text"

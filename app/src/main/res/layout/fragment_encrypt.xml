@@ -1,25 +1,39 @@
 <?xml version="1.0" encoding="utf-8"?>
-<layout>
+<layout xmlns:android="http://schemas.android.com/apk/res/android">
     <data>
         <variable name="viewModel" type="com.example.encryptedstoragekotlin.ui.SecurityViewModel"/>
+        <variable name="view" type="com.example.encryptedstoragekotlin.ui.EncryptFragment" />
     </data>
     <androidx.constraintlayout.widget.ConstraintLayout
-            xmlns:android="http://schemas.android.com/apk/res/android"
             android:layout_width="match_parent"
             android:layout_height="match_parent" xmlns:app="http://schemas.android.com/apk/res-auto">
         <EditText
                 android:layout_width="0dp"
                 android:layout_height="wrap_content"
                 android:id="@+id/encrypted_text"
+                android:text="@={viewModel.encryptText}"
+                android:hint="@string/encrypt_button_hint"
+                android:inputType="text"
+                android:gravity="center"
+                app:clearWarning="@{viewModel.encryptText}"
+                android:layout_marginStart="@dimen/side_margin"
+                android:layout_marginEnd="@dimen/side_margin"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
-                app:layout_constraintTop_toTopOf="parent"/>
+                app:layout_constraintTop_toTopOf="parent"
+                app:layout_constraintVertical_chainStyle="packed"
+                app:layout_constraintBottom_toTopOf="@+id/encrypt_button"
+                android:importantForAutofill="no" />
         <Button
                 android:layout_width="wrap_content"
                 android:layout_height="wrap_content"
-                android:text="Submit"
+                android:id="@id/encrypt_button"
+                android:text="@string/encrypt_button"
+                android:layout_marginTop="@dimen/button_top_margin"
+                android:onClick="@{() -> view.sendMessage()}"
                 app:layout_constraintStart_toStartOf="parent"
                 app:layout_constraintEnd_toEndOf="parent"
+                app:layout_constraintBottom_toBottomOf="parent"
                 app:layout_constraintTop_toBottomOf="@id/encrypted_text"/>
 
     </androidx.constraintlayout.widget.ConstraintLayout>
